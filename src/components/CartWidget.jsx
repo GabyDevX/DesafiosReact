@@ -1,14 +1,23 @@
 import React from 'react'
-import logo from '../logo.svg'
+import cartIcon from '../cartIcon.png'
 
 function CartWidget() {
   const styles = {
-    height: 60,
-    width: 'auto',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '.5rem',
   }
+
+  const cartIconStyle = {
+    height: 40,
+    width: 'auto',
+    cursor: 'pointer',
+  }
+
   return (
-    <div>
-      <img src={logo} className="App-logo" alt="logo" style={styles} />
+    <div style={styles}>
+      <img src={cartIcon} alt="logo" style={cartIconStyle} />
+      <p>0</p>
     </div>
   )
 }

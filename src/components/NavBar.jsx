@@ -9,9 +9,9 @@ function NavBar() {
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: 'grey',
-    top: 0,
-    position: 'sticky',
+    backgroundColor: '#fff',
+    position: 'fixed',
+    padding: '1rem',
   }
 
   return (
