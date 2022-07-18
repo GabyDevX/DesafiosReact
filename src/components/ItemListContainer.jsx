@@ -15,7 +15,6 @@ function ItemListContainer({ titulo }) {
     flexDirection: 'column',
     alignItems: 'center',
     gap: '2rem',
-    borderRadius: 6,
   }
 
   return (

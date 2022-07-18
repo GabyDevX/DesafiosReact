@@ -5,8 +5,8 @@ function NavbarMenu() {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
-    width: '50%',
-    justifyContent: 'space-between',
+    width: '40%',
+    justifyContent: 'space-around',
   }
 
   return (

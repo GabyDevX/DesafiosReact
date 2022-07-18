@@ -4,6 +4,7 @@ function NavBarItem({ title, sectionId }) {
   const styles = {
     textDecoration: 'none',
     color: '#000',
+    fontSize: '1.1rem',
   }
 
   return (

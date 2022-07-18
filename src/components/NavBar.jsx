@@ -6,7 +6,7 @@ function NavBar() {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#fff',
