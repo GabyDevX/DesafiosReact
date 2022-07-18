@@ -11,10 +11,10 @@ function NavbarMenu() {
 
   return (
     <div style={styles}>
-      <NavBarItem />
-      <NavBarItem />
-      <NavBarItem />
-      <NavBarItem />
+      <NavBarItem sectionId="#seccion1" title="Section 1" />
+      <NavBarItem sectionId="#seccion2" title="Section 2" />
+      <NavBarItem sectionId="#seccion3" title="Section 3" />
+      <NavBarItem sectionId="#seccion4" title="Section 4" />
     </div>
   )
 }

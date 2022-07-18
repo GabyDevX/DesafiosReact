@@ -1,14 +1,14 @@
 import React from 'react'
 
-function NavBarItem() {
+function NavBarItem({ title, sectionId }) {
   const styles = {
     textDecoration: 'none',
     color: '#000',
   }
 
   return (
-    <a style={styles} href="#">
-      I'm a section
+    <a style={styles} href={sectionId}>
+      {title}
     </a>
   )
 }

@@ -12,6 +12,7 @@ function NavBar() {
     backgroundColor: '#fff',
     position: 'fixed',
     padding: '1rem',
+    zIndex: '10',
   }
 
   return (
