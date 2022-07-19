@@ -17,6 +17,7 @@ function NavBar() {
 
   return (
     <div style={styles}>
+      <h2>Speakers R</h2>
       <NavbarMenu />
       <CartWidget />
     </div>
