@@ -4,7 +4,7 @@ import placeHolder from '../placeHolder.png'
 import placeHolder2 from '../placeHolder2.png'
 import placeHolder3 from '../placeHolder3.png'
 
-function CardSection({ seccion, sectionId }) {
+function CardSection({ seccion, sectionId, onClick }) {
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
@@ -22,18 +22,21 @@ function CardSection({ seccion, sectionId }) {
     <div style={styles} id={sectionId}>
       <h2>{seccion}</h2>
       <Card
+        onClick={onClick}
         placeHolderImg={placeHolder}
         nombre="JBL Charge 5"
         descripcion="Altavoz portátil resistente al agua con batería integrada"
         precio="200"
       />
       <Card
+        onClick={onClick}
         placeHolderImg={placeHolder2}
         nombre="JBL Go 2"
         descripcion="Altavoz Bluetooth portátil"
         precio="100"
       />
       <Card
+        onClick={onClick}
         placeHolderImg={placeHolder3}
         nombre="JBL Partybox 310"
         descripcion="Altavoz portátil para fiestas con iluminación y el potente sonido JBL Signature"

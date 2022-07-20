@@ -2,7 +2,7 @@ import React from 'react'
 import CartWidget from './CartWidget'
 import NavbarMenu from './NavbarMenu'
 
-function NavBar() {
+function NavBar({ count, onClick }) {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -19,7 +19,7 @@ function NavBar() {
     <div style={styles}>
       <h2>Speakers R</h2>
       <NavbarMenu />
-      <CartWidget />
+      <CartWidget onClick={onClick} count={count} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import cartIcon from '../cartIcon.png'
 
-function CartWidget() {
+function CartWidget({ count, onClick }) {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -16,8 +16,8 @@ function CartWidget() {
 
   return (
     <div style={styles}>
-      <img src={cartIcon} alt="logo" style={cartIconStyle} />
-      <p>0</p>
+      <img onClick={onClick} src={cartIcon} alt="logo" style={cartIconStyle} />
+      <p>{count}</p>
     </div>
   )
 }

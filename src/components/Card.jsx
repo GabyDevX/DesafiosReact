@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Card({ nombre, descripcion, precio, placeHolderImg }) {
+function Card({ nombre, descripcion, precio, placeHolderImg, onClick }) {
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
@@ -15,7 +15,7 @@ function Card({ nombre, descripcion, precio, placeHolderImg }) {
   }
   const styleImage = {
     height: 'auto',
-    width: 250,
+    width: 200,
   }
   const styleButton = {
     border: 'none',
@@ -30,7 +30,9 @@ function Card({ nombre, descripcion, precio, placeHolderImg }) {
       <h3>{nombre}</h3>
       <p>{descripcion}</p>
       <h4>${precio}</h4>
-      <button style={styleButton}>Comprar</button>
+      <button onClick={onClick} style={styleButton}>
+        Comprar
+      </button>
     </div>
   )
 }
