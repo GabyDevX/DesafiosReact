@@ -6,13 +6,17 @@ function NavBar({ count, onClick }) {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#fff',
     position: 'fixed',
     padding: '1rem',
     zIndex: '10',
+  }
+
+  const sameWidth = {
+    width: '40%',
   }
 
   return (

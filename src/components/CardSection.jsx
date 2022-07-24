@@ -1,14 +1,21 @@
 import React from 'react'
 import Card from './Card'
-import placeHolder from '../placeHolder.png'
-import placeHolder2 from '../placeHolder2.png'
-import placeHolder3 from '../placeHolder3.png'
 
-function CardSection({ seccion, sectionId, onClick }) {
+function CardSection({ seccion, sectionId, onClick, products }) {
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'Row',
+    width: '100%',
+    justifyContent: 'space-evenly',
+    padding: '1rem',
+    borderRadius: 6,
+    alignItems: 'stretch',
+    gap: '2rem',
+  }
+  const stylesGeneral = {
+    display: 'flex',
+    flexDirection: 'Column',
     width: '100%',
     justifyContent: 'space-evenly',
     background: 'rgba( 255, 255, 255, 0.25 )',
@@ -18,30 +25,23 @@ function CardSection({ seccion, sectionId, onClick }) {
     borderRadius: 6,
     alignItems: 'stretch',
   }
+
   return (
-    <div style={styles} id={sectionId}>
+    <div id={sectionId} style={stylesGeneral}>
       <h2>{seccion}</h2>
-      <Card
-        onClick={onClick}
-        placeHolderImg={placeHolder}
-        nombre="JBL Charge 5"
-        descripcion="Altavoz portátil resistente al agua con batería integrada"
-        precio="200"
-      />
-      <Card
-        onClick={onClick}
-        placeHolderImg={placeHolder2}
-        nombre="JBL Go 2"
-        descripcion="Altavoz Bluetooth portátil"
-        precio="100"
-      />
-      <Card
-        onClick={onClick}
-        placeHolderImg={placeHolder3}
-        nombre="JBL Partybox 310"
-        descripcion="Altavoz portátil para fiestas con iluminación y el potente sonido JBL Signature"
-        precio="170"
-      />
+      <div style={styles}>
+        {products.map((product, i) => (
+          <Card
+            key={product.id}
+            onClick={onClick}
+            placeHolderImg={product.placeHolder}
+            nombre={product.nombre}
+            descripcion={product.descripcion}
+            precio={product.precio}
+            stockDisponible={product.stockDisponible}
+          />
+        ))}
+      </div>
     </div>
   )
 }
