@@ -15,10 +15,6 @@ function NavBar({ count, onClick }) {
     zIndex: '10',
   }
 
-  const sameWidth = {
-    width: '40%',
-  }
-
   return (
     <div style={styles}>
       <h2>Speakers R</h2>

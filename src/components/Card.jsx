@@ -81,7 +81,6 @@ function Card({
     cursor: 'pointer',
     margin: 0,
   }
-  console.log(placeHolderImg)
   return (
     <div style={styles}>
       <img src={placeHolderImg} style={styleImage} alt="" />
