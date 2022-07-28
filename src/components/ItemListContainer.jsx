@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CardSection from './CardSection'
+import ItemDetail from './ItemDetail'
 
 function ItemListContainer({ titulo, onClick }) {
   const [products, setProducts] = useState([])
@@ -73,10 +74,11 @@ function ItemListContainer({ titulo, onClick }) {
       })
   }, [])
 
+  const ProductDetail = productos[1]
   return (
     <div style={styles}>
       {error ? <h1>No se encontraron los productos</h1> : <h1>{titulo}</h1>}
-      <CardSection
+      {/* <CardSection
         products={products}
         onClick={onClick}
         sectionId="seccion1"
@@ -87,6 +89,15 @@ function ItemListContainer({ titulo, onClick }) {
         onClick={onClick}
         sectionId="seccion2"
         seccion={loading ? 'loading' : 'Sony Speakers'}
+      /> */}
+
+      <ItemDetail
+        onClick={onClick}
+        placeHolderImg={ProductDetail.placeHolder}
+        nombre={ProductDetail.nombre}
+        descripcion={ProductDetail.descripcion}
+        precio={ProductDetail.precio}
+        stockDisponible={ProductDetail.stockDisponible}
       />
     </div>
   )
