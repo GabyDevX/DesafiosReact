@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
-function CardSection({ seccion, sectionId, onClick, products }) {
+function CardSection({ seccion, onClick, products }) {
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
@@ -27,18 +27,20 @@ function CardSection({ seccion, sectionId, onClick, products }) {
   }
 
   return (
-    <div id={sectionId} style={stylesGeneral}>
+    <div style={stylesGeneral}>
       <h2>{seccion}</h2>
       <div style={styles}>
         {products.map((product, i) => (
           <Card
             key={product.id}
             onClick={onClick}
-            placeHolderImg={product.placeHolder}
-            nombre={product.nombre}
-            descripcion={product.descripcion}
-            precio={product.precio}
-            stockDisponible={product.stockDisponible}
+            product={product}
+            // placeHolderImg={product.placeHolder}
+            // nombre={product.nombre}
+            // descripcion={product.descripcion}
+            // precio={product.precio}
+            // stockDisponible={product.stockDisponible}
+            // id={product.id}
           />
         ))}
       </div>

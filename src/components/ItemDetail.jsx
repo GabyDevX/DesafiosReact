@@ -1,14 +1,7 @@
 import React, { useState } from 'react'
 
-const ItemDetail = ({
-  nombre,
-  descripcion,
-  precio,
-  placeHolderImg,
-  onClick,
-  stockDisponible,
-}) => {
-  const [stock, setStock] = useState(stockDisponible)
+const ItemDetail = ({ producto, onClick }) => {
+  const [stock, setStock] = useState(20)
   const [cantidad, setCantidad] = useState(1)
 
   const cambiarStock = () => {
@@ -33,7 +26,7 @@ const ItemDetail = ({
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
-    height: 'auto',
+    minHeight: '100vh',
     width: '100%',
     borderRadius: 6,
     color: '#000',
@@ -52,7 +45,7 @@ const ItemDetail = ({
   }
   const styleImage = {
     height: 'auto',
-    width: 'auto',
+    width: '50%',
   }
   const styleButton = {
     border: 'none',
@@ -87,13 +80,14 @@ const ItemDetail = ({
     cursor: 'pointer',
     margin: 0,
   }
+  console.log(producto)
   return (
     <div style={styles}>
-      <img src={placeHolderImg} style={styleImage} alt="" />
+      <img src={`/${producto.placeHolder}`} style={styleImage} alt="" />
       <div style={styleDetails}>
-        <h2>{nombre}</h2>
-        <p>{descripcion + ' ' + nombre}</p>
-        <h4>Precio: ${precio}</h4>
+        <h2>{producto.nombre}</h2>
+        <p>{producto.descripcion + ' ' + producto.nombre}</p>
+        <h4>Precio: ${producto.precio}</h4>
         <p>Stock: {stock}</p>
         <div style={styleCantidad}>
           <p style={styleClick} onClick={bajarCantidad}>

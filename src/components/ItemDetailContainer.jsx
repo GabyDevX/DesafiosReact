@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import CardSection from './CardSection'
+import ItemDetail from './ItemDetail'
 import { useParams } from 'react-router-dom'
 
-function ItemListContainer({ titulo, onClick }) {
-  const [products, setProducts] = useState([])
+function ItemDetailContainer({ onClick }) {
+  const [product, setProduct] = useState({})
   const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const { idCategoria } = useParams()
-
+  const { idProducto } = useParams()
   const styles = {
     background:
       'linear-gradient(45deg, rgba(16,13,77,1) 18%, rgba(9,9,121,1) 69%, rgba(0,122,147,1) 100%)',
     color: '#fff',
     minHeight: '100vh',
-    paddingTop: '5rem',
+    paddingTop: '7rem',
     paddingBottom: '2rem',
     paddingRight: '2rem',
     paddingLeft: '2rem',
@@ -23,8 +21,6 @@ function ItemListContainer({ titulo, onClick }) {
     gap: '2rem',
   }
   useEffect(() => {
-    setLoading(true)
-    setProducts([])
     let productos = [
       {
         id: 1,
@@ -106,48 +102,27 @@ function ItemListContainer({ titulo, onClick }) {
       },
     ]
 
+    console.log(idProducto)
+
     const myPromise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (!idCategoria) {
-          resolve(productos)
-        } else {
-          resolve(
-            productos.filter(
-              (p) => p.idCategoria === idCategoria.toLowerCase(),
-            ),
-          )
-        }
-      }, 3000)
+      resolve(productos.find((e) => e.id == idProducto))
     })
 
     myPromise
       .then((response) => {
-        setProducts(response)
+        setProduct(response)
       })
       .catch((error) => {
         setError(true)
       })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [idCategoria])
+  }, [idProducto])
 
   return (
     <div style={styles}>
-      {error ? <h1>No se encontraron los productos</h1> : <h1>{titulo}</h1>}
-      <CardSection
-        products={products}
-        onClick={onClick}
-        seccion={
-          loading
-            ? 'loading'
-            : idCategoria
-            ? idCategoria.toUpperCase() + ' ' + 'Speakers'
-            : 'Nuestros Speakers'
-        }
-      />
+      {/* <h1>{product.idCategoria} Speaker</h1> */}
+      <ItemDetail onClick={onClick} producto={product} />
     </div>
   )
 }
 
-export default ItemListContainer
+export default ItemDetailContainer

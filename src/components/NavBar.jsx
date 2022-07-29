@@ -1,6 +1,7 @@
 import React from 'react'
 import CartWidget from './CartWidget'
 import NavbarMenu from './NavbarMenu'
+import { Link } from 'react-router-dom'
 
 function NavBar({ count, onClick }) {
   const styles = {
@@ -15,9 +16,16 @@ function NavBar({ count, onClick }) {
     zIndex: '10',
   }
 
+  const styleLink = {
+    textDecoration: 'none',
+    color: 'inherit',
+  }
+
   return (
     <div style={styles}>
-      <h2>Speakers R</h2>
+      <Link style={styleLink} to={'/'}>
+        <h2>Speakers R</h2>
+      </Link>
       <NavbarMenu />
       <CartWidget onClick={onClick} count={count} />
     </div>

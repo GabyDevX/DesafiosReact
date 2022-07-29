@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function NavBarItem({ title, sectionId }) {
   const styles = {
@@ -8,9 +9,9 @@ function NavBarItem({ title, sectionId }) {
   }
 
   return (
-    <a style={styles} href={sectionId}>
+    <Link style={styles} to={sectionId}>
       {title}
-    </a>
+    </Link>
   )
 }
 

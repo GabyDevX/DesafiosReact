@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import placeHolder from '../placeHolder.png'
+import { Link } from 'react-router-dom'
 
-function Card({
-  nombre,
-  descripcion,
-  precio,
-  placeHolderImg,
-  onClick,
-  stockDisponible,
-}) {
-  const [stock, setStock] = useState(stockDisponible)
+// placeHolderImg={product.placeHolder}
+// nombre={product.nombre}
+// descripcion={product.descripcion}
+// precio={product.precio}
+// stockDisponible={product.stockDisponible}
+// id={product.id}
+
+function Card({ product, onClick }) {
+  const [stock, setStock] = useState(product.stockDisponible)
   const [cantidad, setCantidad] = useState(1)
 
   const cambiarStock = () => {
@@ -42,6 +42,7 @@ function Card({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
+    textAlign: 'center',
     fontSize: '15px',
   }
   const styleImage = {
@@ -81,12 +82,20 @@ function Card({
     cursor: 'pointer',
     margin: 0,
   }
+  const styleLink = {
+    height: 100,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
   return (
     <div style={styles}>
-      <img src={placeHolderImg} style={styleImage} alt="" />
-      <h3>{nombre}</h3>
-      <p>{descripcion}</p>
-      <h4>${precio}</h4>
+      <Link style={styleLink} to={'/producto/' + product.id}>
+        <img src={`/${product.placeHolder}`} style={styleImage} alt="" />
+      </Link>
+      <h3>{product.nombre}</h3>
+      <p>{product.descripcion}</p>
+      <h4>${product.precio}</h4>
       <p>Stock: {stock}</p>
       <div style={styleCantidad}>
         <p style={styleClick} onClick={bajarCantidad}>
