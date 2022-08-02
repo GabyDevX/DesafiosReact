@@ -64,7 +64,6 @@ function Card({ product, onClick }) {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '0.2rem 2rem',
-
     borderRadius: 6,
     backgroundColor: '#39495b',
     color: '#fff',
@@ -81,13 +80,22 @@ function Card({ product, onClick }) {
     alignItems: 'center',
     justifyContent: 'center',
   }
+  const styleDetalle = {
+    width: '100%',
+    margin: '1rem 0',
+    padding: '0 2rem',
+    textAlign: 'center',
+    borderRadius: 6,
+    border: 'none',
+    backgroundColor: '#fff',
+    color: '#427da7',
+  }
   return (
     <div style={styles}>
       <Link style={styleLink} to={'/producto/' + product.id}>
         <img src={`/${product.placeHolder}`} style={styleImage} alt="" />
       </Link>
       <h3>{product.nombre}</h3>
-      {/* <p>{product.descripcion}</p> */}
       <h4>${product.precio}</h4>
       <p>Stock: {stock}</p>
       <div style={styleCantidad}>
@@ -105,6 +113,9 @@ function Card({ product, onClick }) {
       <button onClick={cambiarStock} style={styleButton}>
         Comprar
       </button>
+      <Link to={'/producto/' + product.id}>
+        <button style={styleDetalle}>Detalles</button>
+      </Link>
     </div>
   )
 }
