@@ -12,8 +12,12 @@ function NavbarMenu() {
   return (
     <div style={styles}>
       <NavBarItem sectionId="/categoria/jbl" title="JBL Speakers" />
+      |
       <NavBarItem sectionId="/categoria/sony" title="Sony Speakers" />
-      <NavBarItem sectionId="/producto/1" title="Detalle" />
+      |
+      <NavBarItem sectionId="/categoria/mi" title="Mi Speakers" />
+      |
+      <NavBarItem sectionId="/producto/1" title="Detalle de Item" />
     </div>
   )
 }

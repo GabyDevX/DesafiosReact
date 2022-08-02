@@ -18,9 +18,9 @@ function CardSection({ seccion, onClick, products }) {
     flexDirection: 'Column',
     width: '100%',
     justifyContent: 'space-evenly',
-    background: 'rgba( 255, 255, 255, 0.25 )',
-    boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
-    backdropFilter: 'blur( 7.5px )',
+    // background: 'rgba( 255, 255, 255, 0.25 )',
+    // boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
+    // backdropFilter: 'blur( 7.5px )',
     padding: '1rem',
     borderRadius: 6,
     alignItems: 'stretch',
@@ -30,18 +30,8 @@ function CardSection({ seccion, onClick, products }) {
     <div style={stylesGeneral}>
       <h2>{seccion}</h2>
       <div style={styles}>
-        {products.map((product, i) => (
-          <Card
-            key={product.id}
-            onClick={onClick}
-            product={product}
-            // placeHolderImg={product.placeHolder}
-            // nombre={product.nombre}
-            // descripcion={product.descripcion}
-            // precio={product.precio}
-            // stockDisponible={product.stockDisponible}
-            // id={product.id}
-          />
+        {products.map((product) => (
+          <Card key={product.id} onClick={onClick} product={product} />
         ))}
       </div>
     </div>

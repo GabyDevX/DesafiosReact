@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-// placeHolderImg={product.placeHolder}
-// nombre={product.nombre}
-// descripcion={product.descripcion}
-// precio={product.precio}
-// stockDisponible={product.stockDisponible}
-// id={product.id}
-
 function Card({ product, onClick }) {
   const [stock, setStock] = useState(product.stockDisponible)
   const [cantidad, setCantidad] = useState(1)
@@ -94,7 +87,7 @@ function Card({ product, onClick }) {
         <img src={`/${product.placeHolder}`} style={styleImage} alt="" />
       </Link>
       <h3>{product.nombre}</h3>
-      <p>{product.descripcion}</p>
+      {/* <p>{product.descripcion}</p> */}
       <h4>${product.precio}</h4>
       <p>Stock: {stock}</p>
       <div style={styleCantidad}>
