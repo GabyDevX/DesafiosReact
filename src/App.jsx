@@ -2,6 +2,7 @@ import './App.css'
 import NavBar from './components/NavBar'
 import ItemListContainer from './components/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer'
+import Cart from './components/Cart'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -10,13 +11,10 @@ function App() {
   const increment = (value) => {
     setCount(count + value)
   }
-  const clean = () => {
-    setCount(0)
-  }
   return (
     <>
       <BrowserRouter>
-        <NavBar onClick={clean} count={count} />
+        <NavBar count={count} />
         <Routes>
           <Route
             path="/"
@@ -40,6 +38,7 @@ function App() {
             path="/producto/:idProducto"
             element={<ItemDetailContainer onClick={increment} />}
           />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </>

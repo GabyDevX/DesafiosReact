@@ -3,7 +3,7 @@ import CartWidget from './CartWidget'
 import NavbarMenu from './NavbarMenu'
 import { Link } from 'react-router-dom'
 
-function NavBar({ count, onClick }) {
+function NavBar({ count }) {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -27,7 +27,7 @@ function NavBar({ count, onClick }) {
         <h2>Speakers R</h2>
       </Link>
       <NavbarMenu />
-      <CartWidget onClick={onClick} count={count} />
+      <CartWidget count={count} />
     </div>
   )
 }

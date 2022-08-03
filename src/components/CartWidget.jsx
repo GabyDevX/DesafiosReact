@@ -1,7 +1,8 @@
 import React from 'react'
 import cartIcon from '../cartIcon.png'
+import { Link } from 'react-router-dom'
 
-function CartWidget({ count, onClick }) {
+function CartWidget({ count }) {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -14,11 +15,17 @@ function CartWidget({ count, onClick }) {
     cursor: 'pointer',
   }
 
+  const styleLink = {
+    textDecoration: 'none',
+    color: '#000',
+  }
   return (
-    <div style={styles}>
-      <img onClick={onClick} src={cartIcon} alt="logo" style={cartIconStyle} />
-      <p>{count}</p>
-    </div>
+    <Link to={'/cart'} style={styleLink}>
+      <div style={styles}>
+        <img src={cartIcon} alt="logo" style={cartIconStyle} />
+        <p>{count}</p>
+      </div>
+    </Link>
   )
 }
 

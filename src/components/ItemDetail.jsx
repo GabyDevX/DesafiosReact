@@ -1,27 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import ItemCount from './ItemCount'
+import { Link } from 'react-router-dom'
 
 const ItemDetail = ({ producto, onClick }) => {
-  const [stock, setStock] = useState(20)
-  const [cantidad, setCantidad] = useState(1)
+  const [comprado, setComprado] = useState(true)
+  useEffect(() => {
+    setComprado(true)
+  }, [producto])
 
-  const cambiarStock = () => {
-    const number = Number(cantidad)
-    setStock(stock - cantidad)
-    onClick(number)
-    setCantidad(0)
-  }
-  const bajarCantidad = () => {
-    if (cantidad > 0) {
-      setCantidad(cantidad - 1)
-    }
-  }
-  const subirCantidad = () => {
-    if (cantidad < stock) {
-      setCantidad(cantidad + 1)
-    }
-  }
-  const añadirStock = () => {
-    setStock(stock + 20)
+  const onAdd = () => {
+    setComprado(false)
+    onClick(+1)
   }
   const styles = {
     backgroundColor: '#fff',
@@ -45,7 +34,7 @@ const ItemDetail = ({ producto, onClick }) => {
   }
   const styleImage = {
     height: 'auto',
-    width: '50%',
+    width: '30%',
   }
   const styleButton = {
     border: 'none',
@@ -55,32 +44,6 @@ const ItemDetail = ({ producto, onClick }) => {
     width: '100%',
     cursor: 'pointer',
   }
-  const styleButtonAñadir = {
-    border: 'none',
-    borderRadius: 6,
-    backgroundColor: '#427da7',
-    color: '#fff',
-    width: '100%',
-    fontSize: '1rem',
-    marginBottom: '1rem',
-    cursor: 'pointer',
-  }
-  const styleCantidad = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0.2rem 2rem',
-    width: '100%',
-    borderRadius: 6,
-    backgroundColor: '#39495b',
-    color: '#fff',
-    marginBottom: '1rem',
-    gap: '1rem',
-  }
-  const styleClick = {
-    cursor: 'pointer',
-    margin: 0,
-  }
-  console.log(producto)
   return (
     <div style={styles}>
       <img src={`/${producto.placeHolder}`} style={styleImage} alt="" />
@@ -88,22 +51,13 @@ const ItemDetail = ({ producto, onClick }) => {
         <h2>{producto.nombre}</h2>
         <p>{producto.descripcion + ' ' + producto.nombre}</p>
         <h4>Precio: ${producto.precio}</h4>
-        <p>Stock: {stock}</p>
-        <div style={styleCantidad}>
-          <p style={styleClick} onClick={bajarCantidad}>
-            -
-          </p>
-          <p style={{ margin: 0 }}>{cantidad}</p>
-          <p style={styleClick} onClick={subirCantidad}>
-            +
-          </p>
-        </div>
-        <button onClick={añadirStock} style={styleButtonAñadir}>
-          Añadir Stock
-        </button>
-        <button onClick={cambiarStock} style={styleButton}>
-          Comprar
-        </button>
+        {comprado ? (
+          <ItemCount producto={producto} onClick={onAdd} />
+        ) : (
+          <Link to={'/cart'}>
+            <button style={styleButton}>Comprar Ahora</button>
+          </Link>
+        )}
       </div>
     </div>
   )

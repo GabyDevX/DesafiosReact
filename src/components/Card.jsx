@@ -1,29 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import ItemCount from './ItemCount'
 
-function Card({ product, onClick }) {
-  const [stock, setStock] = useState(product.stockDisponible)
-  const [cantidad, setCantidad] = useState(1)
-
-  const cambiarStock = () => {
-    const number = Number(cantidad)
-    setStock(stock - cantidad)
-    onClick(number)
-    setCantidad(0)
-  }
-  const bajarCantidad = () => {
-    if (cantidad > 0) {
-      setCantidad(cantidad - 1)
-    }
-  }
-  const subirCantidad = () => {
-    if (cantidad < stock) {
-      setCantidad(cantidad + 1)
-    }
-  }
-  const añadirStock = () => {
-    setStock(stock + 20)
-  }
+function Card({ product }) {
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
@@ -41,38 +20,6 @@ function Card({ product, onClick }) {
   const styleImage = {
     height: 'auto',
     width: 100,
-  }
-  const styleButton = {
-    border: 'none',
-    borderRadius: 6,
-    backgroundColor: '#39495b',
-    color: '#fff',
-    width: '60%',
-    cursor: 'pointer',
-  }
-  const styleButtonAñadir = {
-    border: 'none',
-    borderRadius: 6,
-    backgroundColor: '#427da7',
-    color: '#fff',
-    width: '60%',
-    fontSize: '1rem',
-    marginBottom: '1rem',
-    cursor: 'pointer',
-  }
-  const styleCantidad = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0.2rem 2rem',
-    borderRadius: 6,
-    backgroundColor: '#39495b',
-    color: '#fff',
-    marginBottom: '1rem',
-    gap: '1rem',
-  }
-  const styleClick = {
-    cursor: 'pointer',
-    margin: 0,
   }
   const styleLink = {
     height: 100,
@@ -97,22 +44,6 @@ function Card({ product, onClick }) {
       </Link>
       <h3>{product.nombre}</h3>
       <h4>${product.precio}</h4>
-      <p>Stock: {stock}</p>
-      <div style={styleCantidad}>
-        <p style={styleClick} onClick={bajarCantidad}>
-          -
-        </p>
-        <p style={{ margin: 0 }}>{cantidad}</p>
-        <p style={styleClick} onClick={subirCantidad}>
-          +
-        </p>
-      </div>
-      <button onClick={añadirStock} style={styleButtonAñadir}>
-        Añadir Stock
-      </button>
-      <button onClick={cambiarStock} style={styleButton}>
-        Comprar
-      </button>
       <Link to={'/producto/' + product.id}>
         <button style={styleDetalle}>Detalles</button>
       </Link>

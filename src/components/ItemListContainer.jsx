@@ -3,7 +3,7 @@ import CardSection from './CardSection'
 import { useParams } from 'react-router-dom'
 import data from '../data/data.json'
 
-function ItemListContainer({ titulo, onClick }) {
+function ItemListContainer({ titulo }) {
   const [products, setProducts] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -57,7 +57,6 @@ function ItemListContainer({ titulo, onClick }) {
       {error ? <h1>No se encontraron los productos</h1> : <h1>{titulo}</h1>}
       <CardSection
         products={products}
-        onClick={onClick}
         seccion={
           loading
             ? 'loading...'
