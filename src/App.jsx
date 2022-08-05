@@ -5,6 +5,7 @@ import ItemDetailContainer from './components/ItemDetailContainer'
 import Cart from './components/Cart'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ContextData from './context/ContextData'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,7 +13,7 @@ function App() {
     setCount(count + value)
   }
   return (
-    <>
+    <ContextData>
       <BrowserRouter>
         <NavBar count={count} />
         <Routes>
@@ -41,7 +42,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </ContextData>
   )
 }
 
