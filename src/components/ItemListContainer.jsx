@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CardSection from './CardSection'
 import { useParams } from 'react-router-dom'
-import data from '../data/data.json'
+import { MyContext } from '../context/ContextData'
 
 function ItemListContainer({ titulo }) {
   const [products, setProducts] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const { idCategoria } = useParams()
+  const { productsData } = useContext(MyContext)
 
   const styles = {
     background:
@@ -27,14 +28,16 @@ function ItemListContainer({ titulo }) {
     setLoading(true)
     setProducts([])
 
-    console.log(data)
+    console.log(productsData)
     const myPromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         if (!idCategoria) {
-          resolve(data)
+          resolve(productsData)
         } else {
           resolve(
-            data.filter((p) => p.idCategoria === idCategoria.toLowerCase()),
+            productsData.filter(
+              (p) => p.idCategoria === idCategoria.toLowerCase(),
+            ),
           )
         }
       }, 3000)

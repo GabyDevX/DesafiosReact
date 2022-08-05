@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ItemCount from './ItemCount'
 import { Link } from 'react-router-dom'
+import { MyContext } from '../context/ContextData'
 
 const ItemDetail = ({ producto, onClick }) => {
+  const { setProducts, setCart, cart } = useContext(MyContext)
   const [comprado, setComprado] = useState(true)
   useEffect(() => {
     setComprado(true)
@@ -10,6 +12,7 @@ const ItemDetail = ({ producto, onClick }) => {
 
   const onAdd = () => {
     setComprado(false)
+    setCart([producto])
     onClick(+1)
   }
   const styles = {

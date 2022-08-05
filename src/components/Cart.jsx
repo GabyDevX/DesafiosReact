@@ -12,7 +12,7 @@ const Cart = () => {
         height: '100vh',
       }}
     >
-      {cart}
+      {JSON.stringify(cart)}
     </div>
   )
 }
