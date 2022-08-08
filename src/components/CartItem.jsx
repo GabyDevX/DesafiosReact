@@ -1,24 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { MyContext } from '../context/ContextData'
 
-function Card({ product }) {
+function CartItem({ product }) {
+  const { removeItem } = useContext(MyContext)
+  const remover = () => {
+    removeItem(product.id)
+  }
   const styles = {
+    border: '1px solid black',
     backgroundColor: '#fff',
     padding: '.5rem',
-    height: 'auto',
-    width: 250,
+    height: '8rem',
+    width: '70%',
     borderRadius: 6,
     color: '#000',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     textAlign: 'center',
     fontSize: '15px',
-  }
-  const styleImage = {
-    height: 'auto',
-    width: 100,
+    gap: '2rem',
   }
   const styleLink = {
     height: 100,
@@ -26,8 +29,12 @@ function Card({ product }) {
     alignItems: 'center',
     justifyContent: 'center',
   }
-  const styleDetalle = {
-    width: '100%',
+  const styleImage = {
+    height: 'auto',
+    width: 100,
+  }
+  const styleEliminar = {
+    width: '20%',
     margin: '1rem 0',
     padding: '0 2rem',
     textAlign: 'center',
@@ -43,11 +50,13 @@ function Card({ product }) {
       </Link>
       <h3>{product.nombre}</h3>
       <h4>${product.precio}</h4>
-      <Link to={'/producto/' + product.id}>
-        <button style={styleDetalle}>Detalles</button>
-      </Link>
+      <h4>x</h4>
+      <h4>{product.quantity}</h4>
+      <button style={styleEliminar} onClick={remover}>
+        Eliminar
+      </button>
     </div>
   )
 }
 
-export default Card
+export default CartItem

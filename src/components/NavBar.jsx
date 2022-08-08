@@ -3,7 +3,7 @@ import CartWidget from './CartWidget'
 import NavbarMenu from './NavbarMenu'
 import { Link } from 'react-router-dom'
 
-function NavBar({ count }) {
+function NavBar() {
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -11,9 +11,9 @@ function NavBar({ count }) {
     alignItems: 'center',
     width: '100%',
     backgroundColor: '#fff',
-    position: 'fixed',
     padding: '1rem',
     zIndex: '10',
+    height: '5rem',
   }
 
   const styleLink = {
@@ -27,7 +27,7 @@ function NavBar({ count }) {
         <h2>Speakers R</h2>
       </Link>
       <NavbarMenu />
-      <CartWidget count={count} />
+      <CartWidget />
     </div>
   )
 }

@@ -10,7 +10,7 @@ export const ItemCount = ({ onClick, producto }) => {
 
   const cambiarStock = () => {
     setStock(stock - cantidad)
-    onClick()
+    onClick(cantidad)
     setCantidad(0)
   }
   const bajarCantidad = () => {

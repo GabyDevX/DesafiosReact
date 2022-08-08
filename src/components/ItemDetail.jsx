@@ -3,18 +3,18 @@ import ItemCount from './ItemCount'
 import { Link } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
 
-const ItemDetail = ({ producto, onClick }) => {
-  const { setProducts, setCart, cart } = useContext(MyContext)
+const ItemDetail = ({ producto }) => {
+  const { addItem } = useContext(MyContext)
   const [comprado, setComprado] = useState(true)
   useEffect(() => {
     setComprado(true)
   }, [producto])
 
-  const onAdd = () => {
+  const onAdd = (quantity) => {
     setComprado(false)
-    setCart([producto])
-    onClick(+1)
+    addItem(producto, quantity)
   }
+
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',

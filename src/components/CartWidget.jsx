@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
 
 function CartWidget() {
-  const { cart } = useContext(MyContext)
-  const [count, setCount] = useState(0)
-  useEffect(() => {
-    setCount(cart.length)
-  }, [cart])
+  const { count } = useContext(MyContext)
 
   const styles = {
     display: 'flex',

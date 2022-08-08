@@ -5,6 +5,8 @@ export const MyContext = createContext()
 const ContextData = ({ children }) => {
   const [cart, setCart] = useState([])
   const [productsData, setProductsData] = useState([])
+  const [count, setCount] = useState(0)
+
   const data = [
     {
       id: 1,
@@ -121,11 +123,50 @@ const ContextData = ({ children }) => {
     },
   ]
 
+  //Working
+  const addItem = (item, quantity) => {
+    productsData.find((e) => e.id === item.id).stockDisponible -= quantity
+    if (isInCart(item.id)) {
+      cart.find((e) => e.id === item.id).quantity += quantity
+      setCart(cart)
+    } else {
+      const newItem = item
+      newItem.quantity = quantity
+      cart.push(newItem)
+      setCart(cart)
+      setCount(count + 1)
+    }
+  }
+
+  //Working
+  const removeItem = (itemId) => {
+    const newCart = cart.filter((e) => e.id !== itemId)
+    setCount(count - 1)
+    setCart(newCart)
+  }
+
+  //Working
+  const clear = () => {
+    setCart([])
+    setCount(0)
+  }
+
+  //Working
+  const isInCart = (id) => {
+    if (cart.find((item) => item.id === id) === undefined) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   useEffect(() => {
     setProductsData(data)
   }, [])
   return (
-    <MyContext.Provider value={{ cart, setCart, productsData }}>
+    <MyContext.Provider
+      value={{ cart, setCart, productsData, addItem, clear, removeItem, count }}
+    >
       {children}
     </MyContext.Provider>
   )

@@ -16,8 +16,6 @@ function NavbarMenu() {
       <NavBarItem sectionId="/categoria/sony" title="Sony Speakers" />
       |
       <NavBarItem sectionId="/categoria/mi" title="Mi Speakers" />
-      |
-      <NavBarItem sectionId="/producto/1" title="Detalle de Item" />
     </div>
   )
 }

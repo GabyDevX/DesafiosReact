@@ -15,7 +15,6 @@ function ItemListContainer({ titulo }) {
       'linear-gradient(45deg, rgba(16,13,77,1) 18%, rgba(9,9,121,1) 69%, rgba(0,122,147,1) 100%)',
     color: '#fff',
     minHeight: '100vh',
-    paddingTop: '5rem',
     paddingBottom: '2rem',
     paddingRight: '2rem',
     paddingLeft: '2rem',
@@ -28,7 +27,6 @@ function ItemListContainer({ titulo }) {
     setLoading(true)
     setProducts([])
 
-    console.log(productsData)
     const myPromise = new Promise((resolve, reject) => {
       setTimeout(() => {
         if (!idCategoria) {
@@ -40,7 +38,7 @@ function ItemListContainer({ titulo }) {
             ),
           )
         }
-      }, 3000)
+      }, 2000)
     })
 
     myPromise
@@ -53,7 +51,7 @@ function ItemListContainer({ titulo }) {
       .finally(() => {
         setLoading(false)
       })
-  }, [idCategoria])
+  }, [idCategoria, productsData])
 
   return (
     <div style={styles}>
