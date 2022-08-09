@@ -7,6 +7,10 @@ const Cart = () => {
   const limpiar = () => {
     clear()
   }
+  const total = cart.reduce(
+    (total, cartItem) => total + cartItem.precio * cartItem.quantity,
+    0,
+  )
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
@@ -45,6 +49,16 @@ const Cart = () => {
     display: 'flex',
     justifyContent: 'space-evenly',
   }
+  const styleTotal = {
+    margin: 'auto',
+    width: '20%',
+    textAlign: 'center',
+    color: '#000',
+    backgroundColor: '#fff',
+    padding: '2rem',
+    borderRadius: 6,
+    fontSize: '1.4rem',
+  }
   return (
     <div style={stylesGeneral}>
       {cart.length > 0 ? (
@@ -54,13 +68,16 @@ const Cart = () => {
               <CartItem key={product.id} product={product} />
             ))}
           </div>
-          <div style={styleButtons}>
-            <button style={styleLimpiar} onClick={limpiar}>
-              Limpiar carrito
-            </button>
-            <button style={styleLimpiar} onClick={limpiar}>
-              Comprar
-            </button>
+          <div>
+            <p style={styleTotal}>Total: {total}</p>
+            <div style={styleButtons}>
+              <button style={styleLimpiar} onClick={limpiar}>
+                Limpiar carrito
+              </button>
+              <button style={styleLimpiar} onClick={limpiar}>
+                Comprar
+              </button>
+            </div>
           </div>
         </>
       ) : (
