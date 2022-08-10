@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import CardSection from './CardSection'
 import { useParams } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
-import '../css/ItemListContainer.css'
+import Loader from './Loader'
 
 function ItemListContainer({ titulo }) {
   const [products, setProducts] = useState([])
@@ -24,11 +24,7 @@ function ItemListContainer({ titulo }) {
     alignItems: 'center',
     gap: '2rem',
   }
-  const stylesLoading = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
+
   useEffect(() => {
     setLoading(true)
     setProducts([])
@@ -65,17 +61,12 @@ function ItemListContainer({ titulo }) {
       <CardSection
         products={products}
         seccion={
-          loading ? (
-            <div style={stylesLoading}>
-              <span className="loader"></span>
-            </div>
-          ) : idCategoria ? (
-            idCategoria.toUpperCase() + ' ' + 'Speakers'
-          ) : (
-            'Nuestros Speakers'
-          )
+          idCategoria
+            ? idCategoria.toUpperCase() + ' ' + 'Speakers'
+            : 'Nuestros Speakers'
         }
       />
+      <Loader loading={loading} />
     </div>
   )
 }
