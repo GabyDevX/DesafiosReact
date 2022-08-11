@@ -134,14 +134,19 @@ const ContextData = ({ children }) => {
       newItem.quantity = quantity
       cart.push(newItem)
       setCart(cart)
-      setCount(count + 1)
+      setCount(count + quantity)
     }
   }
 
   //Working
-  const removeItem = (itemId) => {
+  const removeItem = (itemId, quantity) => {
     const newCart = cart.filter((e) => e.id !== itemId)
-    setCount(count - 1)
+    const newProducts = productsData.filter((e) => e.id !== itemId)
+    const newProduct = productsData.find((e) => e.id === itemId)
+    newProduct.stockDisponible += quantity
+    newProducts.push(newProduct)
+    setProductsData(newProducts)
+    setCount(count - quantity)
     setCart(newCart)
   }
 

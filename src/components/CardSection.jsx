@@ -27,9 +27,11 @@ function CardSection({ seccion, products }) {
     <div style={stylesGeneral}>
       <h2>{seccion}</h2>
       <div style={styles}>
-        {products.map((product) => (
-          <Card key={product.id} product={product} />
-        ))}
+        {products
+          .sort((a, b) => a.precio - b.precio)
+          .map((product) => (
+            <Card key={product.id} product={product} />
+          ))}
       </div>
     </div>
   )

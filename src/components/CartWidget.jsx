@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import cartIcon from '../cartIcon.png'
+import cartIconEmpty from '../cartIconEmpty.png'
 import { Link } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
 
@@ -25,8 +26,12 @@ function CartWidget() {
   return (
     <Link to={'/cart'} style={styleLink}>
       <div style={styles}>
-        <img src={cartIcon} alt="logo" style={cartIconStyle} />
-        <p>{count}</p>
+        <img
+          src={count > 0 ? cartIcon : cartIconEmpty}
+          alt="logo"
+          style={cartIconStyle}
+        />
+        <p>{count > 0 ? count : ' '}</p>
       </div>
     </Link>
   )

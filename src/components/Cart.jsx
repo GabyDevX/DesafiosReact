@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import CartItem from './CartItem'
 import { MyContext } from '../context/ContextData'
+import { Link } from 'react-router-dom'
 
 const Cart = () => {
   const { clear, cart } = useContext(MyContext)
@@ -81,9 +82,16 @@ const Cart = () => {
           </div>
         </>
       ) : (
-        <h1 style={{ textAlign: 'center' }}>
-          No hay ningún producto en el carrito
-        </h1>
+        <>
+          <h1 style={{ textAlign: 'center' }}>
+            No hay ningún producto en el carrito
+          </h1>
+          <Link style={{ textAlign: 'center' }} to="/">
+            <button style={styleLimpiar} onClick={limpiar}>
+              Explorar tienda
+            </button>
+          </Link>
+        </>
       )}
     </div>
   )

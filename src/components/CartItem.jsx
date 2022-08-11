@@ -5,14 +5,14 @@ import { MyContext } from '../context/ContextData'
 function CartItem({ product }) {
   const { removeItem } = useContext(MyContext)
   const remover = () => {
-    removeItem(product.id)
+    removeItem(product.id, product.quantity)
   }
   const styles = {
     border: '1px solid black',
     backgroundColor: '#fff',
     padding: '.5rem',
     height: '8rem',
-    width: '70%',
+    width: '80%',
     borderRadius: 6,
     color: '#000',
     display: 'flex',
@@ -50,8 +50,10 @@ function CartItem({ product }) {
       </Link>
       <h3>{product.nombre}</h3>
       <h4>${product.precio}</h4>
-      <h4>x</h4>
-      <h4>{product.quantity}</h4>
+      <h2>|</h2>
+      <h4>x{product.quantity}</h4>
+      <h2>|</h2>
+      <h4>${product.precio * product.quantity}</h4>
       <button style={styleEliminar} onClick={remover}>
         Eliminar
       </button>
