@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function NavBarItem({ title, sectionId }) {
+  //Estilos
   const styles = {
     textDecoration: 'none',
     color: '#000',

@@ -4,6 +4,7 @@ import NavbarMenu from './NavbarMenu'
 import { Link } from 'react-router-dom'
 
 function NavBar() {
+  //Estilos
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -15,7 +16,6 @@ function NavBar() {
     zIndex: '10',
     height: '5rem',
   }
-
   const styleLink = {
     textDecoration: 'none',
     color: 'inherit',

@@ -2,6 +2,7 @@ import React from 'react'
 import '../css/Loader.css'
 
 const Loader = ({ loading }) => {
+  //Estilos
   const stylesLoading = {
     display: 'flex',
     alignItems: 'center',
@@ -9,7 +10,7 @@ const Loader = ({ loading }) => {
   }
   return (
     <div style={stylesLoading}>
-      <span className={loading && 'loader'}></span>
+      <span className={loading ? 'loader' : undefined}></span>
     </div>
   )
 }

@@ -4,14 +4,17 @@ import { MyContext } from '../context/ContextData'
 import { Link } from 'react-router-dom'
 
 const Cart = () => {
+  //Context data
   const { clear, cart } = useContext(MyContext)
   const limpiar = () => {
     clear()
   }
+  //Se usa el metodo reduce para sumar los precios * cantidad de cada producto y obtener el total
   const total = cart.reduce(
     (total, cartItem) => total + cartItem.precio * cartItem.quantity,
     0,
   )
+  //Estilos
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
@@ -70,7 +73,7 @@ const Cart = () => {
             ))}
           </div>
           <div>
-            <p style={styleTotal}>Total: {total}</p>
+            <p style={styleTotal}>Total: U$S {total}</p>
             <div style={styleButtons}>
               <button style={styleLimpiar} onClick={limpiar}>
                 Limpiar carrito

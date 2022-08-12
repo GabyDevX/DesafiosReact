@@ -2,6 +2,7 @@ import React from 'react'
 import NavBarItem from './NavBarItem'
 
 function NavbarMenu() {
+  //Estilos
   const styles = {
     display: 'flex',
     flexDirection: 'row',

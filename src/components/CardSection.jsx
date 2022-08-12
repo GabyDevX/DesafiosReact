@@ -2,6 +2,7 @@ import React from 'react'
 import Card from './Card'
 
 function CardSection({ seccion, products }) {
+  //Estilos
   const styles = {
     display: 'flex',
     flexWrap: 'wrap',
@@ -27,6 +28,7 @@ function CardSection({ seccion, products }) {
     <div style={stylesGeneral}>
       <h2>{seccion}</h2>
       <div style={styles}>
+        {/* Ordeno los productos por precio y luego los renderizo con un map */}
         {products
           .sort((a, b) => a.precio - b.precio)
           .map((product) => (

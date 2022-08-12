@@ -4,17 +4,25 @@ import { Link } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
 
 const ItemDetail = ({ producto }) => {
+  //Context data
   const { addItem } = useContext(MyContext)
-  const [comprado, setComprado] = useState(true)
+
+  //Estado
+  const [comprado, setComprado] = useState(false)
+
+  //Cada vez que cambie el producto se reinicia el valor del estado
   useEffect(() => {
-    setComprado(true)
+    setComprado(false)
   }, [producto])
 
+  //Se cambia el valor del estado para que aparezca un botón que redireccione al carrito
+  //Se llama a la funcion del context para añadir el producto y su cantidad al carrito
   const onAdd = (quantity) => {
-    setComprado(false)
+    setComprado(true)
     addItem(producto, quantity)
   }
 
+  //Estilos
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
@@ -49,12 +57,12 @@ const ItemDetail = ({ producto }) => {
   }
   return (
     <div style={styles}>
-      <img src={`/${producto.placeHolder}`} style={styleImage} alt="" />
+      <img src={`/${producto.imagen}`} style={styleImage} alt="" />
       <div style={styleDetails}>
         <h2>{producto.nombre}</h2>
         <p>{producto.descripcion + ' ' + producto.nombre}</p>
-        <h4>Precio: ${producto.precio}</h4>
-        {comprado ? (
+        <h4>Precio: U$S {producto.precio}</h4>
+        {!comprado ? (
           <ItemCount producto={producto} onClick={onAdd} />
         ) : (
           <Link to={'/cart'}>

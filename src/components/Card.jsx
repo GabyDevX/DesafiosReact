@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Card({ product }) {
+  //Estilos
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
@@ -36,13 +37,14 @@ function Card({ product }) {
     backgroundColor: '#fff',
     color: '#427da7',
   }
+
   return (
     <div style={styles}>
       <Link style={styleLink} to={'/producto/' + product.id}>
-        <img src={`/${product.placeHolder}`} style={styleImage} alt="" />
+        <img src={`/${product.imagen}`} style={styleImage} alt="" />
       </Link>
       <h3>{product.nombre}</h3>
-      <h4>${product.precio}</h4>
+      <h4>U$S {product.precio}</h4>
       <Link to={'/producto/' + product.id}>
         <button style={styleDetalle}>Detalles</button>
       </Link>
