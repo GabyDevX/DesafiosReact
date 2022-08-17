@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { addDoc, getFirestore, collection } from 'firebase/firestore'
 import { MyContext } from '../context/ContextData'
 import moment from 'moment'
+import Swal from 'sweetalert2'
 
 const Checkout = () => {
   const { cart, total, clear } = useContext(MyContext)
@@ -10,6 +11,47 @@ const Checkout = () => {
   const [email, setEmail] = useState('')
   const [orderDocId, setOrderDocId] = useState('')
   const finalizarCompra = () => {
+    const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+
+    const regexTelefono = /^[0-9]+$/
+
+    if (email === '' || phone === '' || name === '') {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Los campos no pueden estar vacios',
+        icon: 'error',
+        confirmButtonText: 'Continuar',
+      })
+      return
+    }
+
+    if (email !== '' && !regexEmail.test(email)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Ingrese un email válido',
+        icon: 'error',
+        confirmButtonText: 'Continuar',
+      })
+      return
+    }
+
+    if (phone !== '' && !regexTelefono.test(phone)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Ingrese un número de telefono válido',
+        icon: 'error',
+        confirmButtonText: 'Continuar',
+      })
+      return
+    }
+
+    Swal.fire({
+      title: 'Exito!',
+      text: 'Ha realizado exitosamente su compra',
+      icon: 'success',
+      confirmButtonText: 'Continuar',
+    })
+
     const order = {
       buyer: {
         name,
