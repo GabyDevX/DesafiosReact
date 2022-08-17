@@ -1,10 +1,11 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
 export const MyContext = createContext()
 
 const ContextData = ({ children }) => {
   const [cart, setCart] = useState([])
   const [count, setCount] = useState(0)
+  const [total, setTotal] = useState(0)
 
   const addItem = (item, quantity) => {
     //Manejo de stock
@@ -48,7 +49,16 @@ const ContextData = ({ children }) => {
 
   return (
     <MyContext.Provider
-      value={{ cart, setCart, addItem, clear, removeItem, count }}
+      value={{
+        cart,
+        setCart,
+        addItem,
+        clear,
+        removeItem,
+        count,
+        total,
+        setTotal,
+      }}
     >
       {children}
     </MyContext.Provider>

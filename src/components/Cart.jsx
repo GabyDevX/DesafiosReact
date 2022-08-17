@@ -1,19 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import CartItem from './CartItem'
 import { MyContext } from '../context/ContextData'
 import { Link } from 'react-router-dom'
 
 const Cart = () => {
   //Context data
-  const { clear, cart } = useContext(MyContext)
+  const { clear, cart, setTotal, total } = useContext(MyContext)
   const limpiar = () => {
     clear()
   }
   //Se usa el metodo reduce para sumar los precios * cantidad de cada producto y obtener el total
-  const total = cart.reduce(
-    (total, cartItem) => total + cartItem.precio * cartItem.quantity,
-    0,
-  )
+
+  useEffect(() => {
+    const totalcompra = cart.reduce(
+      (total, cartItem) => total + cartItem.precio * cartItem.quantity,
+      0,
+    )
+    setTotal(totalcompra)
+  }, [cart])
+
   //Estilos
   const styles = {
     display: 'flex',
@@ -41,6 +46,16 @@ const Cart = () => {
   }
   const styleLimpiar = {
     width: '30%',
+    margin: '1rem 0',
+    padding: '0 2rem',
+    textAlign: 'center',
+    borderRadius: 6,
+    border: 'none',
+    backgroundColor: '#fff',
+    color: '#427da7',
+  }
+  const styleComprar = {
+    width: '100%',
     margin: '1rem 0',
     padding: '0 2rem',
     textAlign: 'center',
@@ -78,9 +93,9 @@ const Cart = () => {
               <button style={styleLimpiar} onClick={limpiar}>
                 Limpiar carrito
               </button>
-              <button style={styleLimpiar} onClick={limpiar}>
-                Comprar
-              </button>
+              <Link style={{ width: '30%' }} to={'/finalizar'}>
+                <button style={styleComprar}>Comprar</button>
+              </Link>
             </div>
           </div>
         </>
