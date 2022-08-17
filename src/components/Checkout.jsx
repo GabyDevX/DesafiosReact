@@ -25,20 +25,20 @@ const Checkout = () => {
       return
     }
 
-    if (email !== '' && !regexEmail.test(email)) {
+    if (phone !== '' && !regexTelefono.test(phone)) {
       Swal.fire({
         title: 'Error!',
-        text: 'Ingrese un email válido',
+        text: 'Ingrese un número de telefono válido',
         icon: 'error',
         confirmButtonText: 'Continuar',
       })
       return
     }
 
-    if (phone !== '' && !regexTelefono.test(phone)) {
+    if (email !== '' && !regexEmail.test(email)) {
       Swal.fire({
         title: 'Error!',
-        text: 'Ingrese un número de telefono válido',
+        text: 'Ingrese un email válido',
         icon: 'error',
         confirmButtonText: 'Continuar',
       })
@@ -102,6 +102,7 @@ const Checkout = () => {
         style={styleInput}
         type="text"
         name="nombre"
+        placeholder="Nombre"
         id=""
         value={name}
         onChange={(event) => setName(event.target.value)}
@@ -110,6 +111,7 @@ const Checkout = () => {
         style={styleInput}
         type="tel"
         name="telefono"
+        placeholder="Telefono"
         id=""
         value={phone}
         onChange={(event) => setPhone(event.target.value)}
@@ -118,6 +120,7 @@ const Checkout = () => {
         style={styleInput}
         type="email"
         name="email"
+        placeholder="Email"
         id=""
         value={email}
         onChange={(event) => setEmail(event.target.value)}
