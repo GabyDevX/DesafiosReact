@@ -8,8 +8,6 @@ const ContextData = ({ children }) => {
   const [total, setTotal] = useState(0)
 
   const addItem = (item, quantity) => {
-    //Manejo de stock
-    // productsData.find((e) => e.id === item.id).stock -= quantity
     if (isInCart(item.id)) {
       cart.find((e) => e.id === item.id).quantity += quantity
       setCart(cart)
@@ -24,12 +22,6 @@ const ContextData = ({ children }) => {
 
   const removeItem = (itemId, quantity) => {
     const newCart = cart.filter((e) => e.id !== itemId)
-    //Manejo de stock
-    // const newProducts = productsData.filter((e) => e.id !== itemId)
-    // const newProduct = productsData.find((e) => e.id === itemId)
-    // newProduct.stock += quantity
-    // newProducts.push(newProduct)
-    // setProductsData(newProducts)
     setCount(count - quantity)
     setCart(newCart)
   }

@@ -1,20 +1,32 @@
 import React, { useState, useContext } from 'react'
-import { addDoc, getFirestore, collection } from 'firebase/firestore'
+import {
+  addDoc,
+  getFirestore,
+  collection,
+  updateDoc,
+  doc,
+} from 'firebase/firestore'
 import { MyContext } from '../context/ContextData'
 import moment from 'moment'
 import Swal from 'sweetalert2'
 
 const Checkout = () => {
+  //Context data y estados
   const { cart, total, clear } = useContext(MyContext)
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [orderDocId, setOrderDocId] = useState('')
-  const finalizarCompra = () => {
-    const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
+  //Funcion para finalizar la compra
+  const finalizarCompra = () => {
+    //Expresiones regulares para las restricciones del formulario
+    const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     const regexTelefono = /^[0-9]+$/
 
+    //Restricciones del formulario
+
+    //Campos vacíos
     if (email === '' || phone === '' || name === '') {
       Swal.fire({
         title: 'Error!',
@@ -25,6 +37,7 @@ const Checkout = () => {
       return
     }
 
+    //Numero de telefono correcto
     if (phone !== '' && !regexTelefono.test(phone)) {
       Swal.fire({
         title: 'Error!',
@@ -35,6 +48,7 @@ const Checkout = () => {
       return
     }
 
+    //Direccion de email correcto
     if (email !== '' && !regexEmail.test(email)) {
       Swal.fire({
         title: 'Error!',
@@ -45,6 +59,7 @@ const Checkout = () => {
       return
     }
 
+    //Alerta en caso de éxito
     Swal.fire({
       title: 'Exito!',
       text: 'Ha realizado exitosamente su compra',
@@ -52,6 +67,7 @@ const Checkout = () => {
       confirmButtonText: 'Continuar',
     })
 
+    //Documento para enviar a Firestore
     const order = {
       buyer: {
         name,
@@ -63,15 +79,22 @@ const Checkout = () => {
       total: total,
     }
 
+    //Firestore comandos para subir documento(orden de compra) y actualizar stock de documentos(productos)
     const db = getFirestore()
 
     const refCollection = collection(db, 'orders')
 
     addDoc(refCollection, order).then((res) => {
       setOrderDocId(res.id)
+      cart.forEach((product) =>
+        updateDoc(doc(db, 'productos', product.id), {
+          stock: product.stock - product.quantity,
+        }),
+      )
       clear()
     })
   }
+  //Estilos
   const styles = {
     background:
       'linear-gradient(45deg, rgba(16,13,77,1) 18%, rgba(9,9,121,1) 69%, rgba(0,122,147,1) 100%)',
