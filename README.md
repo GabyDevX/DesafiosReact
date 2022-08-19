@@ -1,7 +1,45 @@
-# Speakers Ramirez
+## Speakers Ramirez - Ecommerce React project
 
-## Este es mi proyecto del curso React js de Coderhouse, se trata de un Ecommerce donde se venden parlantes de diferentes marcas.
+### See the magic of this project [Demo](https://speakersramirez.web.app)
 
-## El proyecto esta separado en componentes conectados entre sí pasando props a los hijos y se manejan estados utilizando los hooks de useState y useEffect, el código relacionado al diseño está incluido en cada componente utilizando solamente css, el proyecto está creando en Vite y tiene las mejores practicas para programar aplicadas a lo largo del mismo.
+#
 
-## https://speakersramirez.web.app/finalizar
+## Description
+
+### I have made this proyect for the CoderHouse React js course, it's about an Ecommerce where the main product are high quality speakers.
+
+### The project uses the best practices for software development, using hooks and database to give a more real and professional experience.
+
+#
+
+## Setup
+
+### This project was made using [Vite](https://vitejs.dev/) because it's one of the best tools to build a react application, uses jsx as the main files extension and is faster than other tools.
+
+### Use the following scripts to clone the repo, download the node modules and run the app:
+
+Clone Repository:
+
+```
+git clone https://github.com/GabyDevX/Speakers_Ramirez.git
+```
+
+Install dependencies:
+
+```
+npm install
+```
+
+run project:
+
+```
+npm run dev
+```
+
+## Technologies and libraries
+
+- [Vite](https://vitejs.dev/)
+- [Sweet Alert](https://sweetalert2.github.io/)
+- [React moment](https://www.npmjs.com/package/react-moment)
+- [Firebase](https://firebase.google.com/)
+- [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
