@@ -1,38 +1,48 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { MyContext } from '../context/ContextData'
+import Swal from 'sweetalert2'
 
-export const ItemCount = ({ onClick, producto }) => {
-  //Estados
+export const ItemCount = ({ onClick, product }) => {
+  //Context data
+  const { cart } = useContext(MyContext)
+
+  //States
   const [stock, setStock] = useState(0)
-  const [cantidad, setCantidad] = useState(1)
+  const [quantity, setQuantity] = useState(1)
 
-  //Al cargar el componente y cada vez que cambie el producto
-  //Se registrará el stock en el estado
   useEffect(() => {
-    setStock(producto.stock)
-  }, [producto])
+    //If the product is in the cart, perform the operation to set the available stock
+    if (cart.find((item) => item.id === product.id)) {
+      const productoCarrito = cart.find((item) => item.id === product.id)
+      setStock(product.stock - productoCarrito.quantity)
+    } else {
+      setStock(product.stock)
+    }
+  }, [product, cart])
 
-  //Se cambia el valor del stock y se llama a la funcion del componente padre,
-  //Además se reinicia el valor de la cantidad elegida a 0
-  const cambiarStock = () => {
-    setStock(stock - cantidad)
-    onClick(cantidad)
-    setCantidad(0)
-  }
-
-  //Se baja la cantidad si es mayor a 0
-  const bajarCantidad = () => {
-    if (cantidad > 0) {
-      setCantidad(cantidad - 1)
+  //We call father component function and change the stock
+  const changeStock = () => {
+    if (stock > 0) {
+      setStock(stock - quantity)
+      onClick(quantity)
+      setQuantity(0)
+    } else {
+      Swal.fire('Ups!', "We don't have stock of this product", 'error')
     }
   }
 
-  //Se sube la cantidad si es menor al stock disponible del producto
-  const subirCantidad = () => {
-    if (cantidad < stock) {
-      setCantidad(cantidad + 1)
+  const quantityDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1)
     }
   }
-  //Estilos
+
+  const quantityIncrease = () => {
+    if (quantity < stock) {
+      setQuantity(quantity + 1)
+    }
+  }
+  //Styles
   const styles = {
     border: '1px solid',
     padding: '1rem',
@@ -47,7 +57,7 @@ export const ItemCount = ({ onClick, producto }) => {
     width: '100%',
     cursor: 'pointer',
   }
-  const styleCantidad = {
+  const styleQuantity = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '0.2rem 2rem',
@@ -64,17 +74,17 @@ export const ItemCount = ({ onClick, producto }) => {
   return (
     <div style={styles}>
       <p>Stock: {stock}</p>
-      <div style={styleCantidad}>
-        <p style={styleClick} onClick={bajarCantidad}>
+      <div style={styleQuantity}>
+        <p style={styleClick} onClick={quantityDecrease}>
           -
         </p>
-        <p style={{ margin: 0 }}>{cantidad}</p>
-        <p style={styleClick} onClick={subirCantidad}>
+        <p style={{ margin: 0 }}>{quantity}</p>
+        <p style={styleClick} onClick={quantityIncrease}>
           +
         </p>
       </div>
-      <button onClick={cambiarStock} style={styleButton}>
-        Añadir al carrito
+      <button onClick={changeStock} style={styleButton}>
+        Add to cart
       </button>
     </div>
   )

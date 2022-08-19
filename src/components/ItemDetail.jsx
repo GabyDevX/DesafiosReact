@@ -3,26 +3,24 @@ import ItemCount from './ItemCount'
 import { Link } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
 
-const ItemDetail = ({ producto }) => {
+const ItemDetail = ({ product }) => {
   //Context data
   const { addItem } = useContext(MyContext)
 
-  //Estado
-  const [comprado, setComprado] = useState(false)
+  //State
+  const [bought, setBought] = useState(false)
 
-  //Cada vez que cambie el producto se reinicia el valor del estado
+  //We reset the state every time the product is changed
   useEffect(() => {
-    setComprado(false)
-  }, [producto])
+    setBought(false)
+  }, [product])
 
-  //Se cambia el valor del estado para que aparezca un botón que redireccione al carrito
-  //Se llama a la funcion del context para añadir el producto y su cantidad al carrito
   const onAdd = (quantity) => {
-    setComprado(true)
-    addItem(producto, quantity)
+    setBought(true)
+    addItem(product, quantity)
   }
 
-  //Estilos
+  //Styles
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
@@ -57,19 +55,27 @@ const ItemDetail = ({ producto }) => {
   }
   return (
     <div style={styles}>
-      <img src={`/${producto.imagen}`} style={styleImage} alt="" />
-      <div style={styleDetails}>
-        <h2>{producto.nombre}</h2>
-        <p>{producto.descripcion + ' ' + producto.nombre}</p>
-        <h4>Precio: U$S {producto.precio}</h4>
-        {!comprado ? (
-          <ItemCount producto={producto} onClick={onAdd} />
-        ) : (
-          <Link to={'/cart'}>
-            <button style={styleButton}>Comprar Ahora</button>
-          </Link>
-        )}
-      </div>
+      {product === undefined ? (
+        <h1>The product doesn't exist'</h1>
+      ) : (
+        <div style={styles}>
+          <img src={`${product.imagen}`} style={styleImage} alt="" />
+          <div style={styleDetails}>
+            <h2>{product.nombre}</h2>
+            <p>{product.descripcion + ' ' + product.nombre}</p>
+            <h4>Price: U$S {product.precio}</h4>
+            <p>Store guarantee: 1 month</p>
+            <p>Manufacturer guarantee: 2 years</p>
+            {!bought ? (
+              <ItemCount product={product} onClick={onAdd} />
+            ) : (
+              <Link to={'/cart'}>
+                <button style={styleButton}>Buy now!</button>
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

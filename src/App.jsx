@@ -16,18 +16,15 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<ItemListContainer titulo="Speakers Ramirez" />}
+            element={<ItemListContainer title="Speakers Ramirez" />}
           />
           <Route
-            path="/categoria/:idCategoria"
-            element={<ItemListContainer titulo="Speakers Ramirez" />}
+            path="/category/:idCategory"
+            element={<ItemListContainer title="Speakers Ramirez" />}
           />
-          <Route
-            path="/producto/:idProducto"
-            element={<ItemDetailContainer />}
-          />
+          <Route path="/product/:idProduct" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/finalizar" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </ContextData>

@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/Loader.css'
 
 const Loader = ({ loading }) => {
-  //Estilos
+  //Styles
   const stylesLoading = {
     display: 'flex',
     alignItems: 'center',

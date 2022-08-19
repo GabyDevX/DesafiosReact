@@ -10,14 +10,14 @@ import {
   where,
 } from 'firebase/firestore'
 
-function ItemListContainer({ titulo }) {
-  //Estados
+function ItemListContainer({ title }) {
+  //States
   const [products, setProducts] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
-  const { idCategoria } = useParams()
+  const { idCategory } = useParams()
 
-  //Estilos
+  //Styles
   const styles = {
     background:
       'linear-gradient(45deg, rgba(16,13,77,1) 18%, rgba(9,9,121,1) 69%, rgba(0,122,147,1) 100%)',
@@ -31,10 +31,7 @@ function ItemListContainer({ titulo }) {
     gap: '2rem',
   }
 
-  //Cada vez que cargue o que cambie el id de categoria reiniciara el valor del estado de productos para
-  //No duplicar los datos y se inicia el loader cambiando su estado
-  //Se conecta con la base de datos y en caso de existir un parametro URL se filtra
-  //De no ser asi se reciben todos los datos y se añaden al estado de productos
+  //Logic to load all the products or products by category using the URL param
   useEffect(() => {
     setLoading(true)
     setProducts([])
@@ -44,10 +41,10 @@ function ItemListContainer({ titulo }) {
     const itemCollection = collection(db, 'productos')
     const collectionFiltered = query(
       collection(db, 'productos'),
-      where('idCategoria', '==', `${idCategoria}`),
+      where('idCategoria', '==', `${idCategory}`),
     )
 
-    getDocs(!idCategoria ? itemCollection : collectionFiltered)
+    getDocs(!idCategory ? itemCollection : collectionFiltered)
       .then((snapshot) => {
         setProducts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
       })
@@ -55,17 +52,17 @@ function ItemListContainer({ titulo }) {
         setError(true)
       })
       .finally(() => setLoading(false))
-  }, [idCategoria])
+  }, [idCategory])
 
   return (
     <div style={styles}>
-      {error ? <h1>No se encontraron los productos</h1> : <h1>{titulo}</h1>}
+      {error ? <h1>We couldn't find any products'</h1> : <h1>{title}</h1>}
       <CardSection
         products={products}
-        seccion={
-          idCategoria
-            ? idCategoria.toUpperCase() + ' ' + 'Speakers'
-            : 'Nuestros Speakers'
+        section={
+          idCategory
+            ? idCategory.toUpperCase() + ' ' + 'Speakers'
+            : 'Our Speakers'
         }
       />
       <Loader loading={loading} />

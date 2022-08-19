@@ -4,7 +4,7 @@ import NavbarMenu from './NavbarMenu'
 import { Link } from 'react-router-dom'
 
 function NavBar() {
-  //Estilos
+  //Styles
   const styles = {
     display: 'flex',
     flexDirection: 'row',

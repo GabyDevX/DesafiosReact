@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Card({ product }) {
-  //Estilos
+  //Styles
   const styles = {
     backgroundColor: '#fff',
     padding: '.5rem',
@@ -27,7 +27,7 @@ function Card({ product }) {
     alignItems: 'center',
     justifyContent: 'center',
   }
-  const styleDetalle = {
+  const styleDetail = {
     width: '100%',
     margin: '1rem 0',
     padding: '0 2rem',
@@ -40,13 +40,13 @@ function Card({ product }) {
 
   return (
     <div style={styles}>
-      <Link style={styleLink} to={'/producto/' + product.id}>
-        <img src={`/${product.imagen}`} style={styleImage} alt="" />
+      <Link style={styleLink} to={'/product/' + product.id}>
+        <img src={`${product.imagen}`} style={styleImage} alt="" />
       </Link>
       <h3>{product.nombre}</h3>
       <h4>U$S {product.precio}</h4>
-      <Link to={'/producto/' + product.id}>
-        <button style={styleDetalle}>Detalles</button>
+      <Link to={'/product/' + product.id}>
+        <button style={styleDetail}>Details</button>
       </Link>
     </div>
   )

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
-import cartIcon from '../cartIcon.png'
-import cartIconEmpty from '../cartIconEmpty.png'
+import cartIcon from '../assets/cartIcon.png'
+import cartIconEmpty from '../assets/cartIconEmpty.png'
 import { Link } from 'react-router-dom'
 import { MyContext } from '../context/ContextData'
 
 function CartWidget() {
-  //Context data de la cantidad de articulos en el carrito
+  //Context data
   const { count } = useContext(MyContext)
-  //Estilos
+  //Styles
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -22,12 +22,11 @@ function CartWidget() {
     textDecoration: 'none',
     color: '#000',
   }
-
   return (
     <Link to={'/cart'} style={styleLink}>
       <div style={styles}>
         <img
-          // El icono varía de si hay elementos en el carrito o no
+          //The icon is diferent if the cart if empty or not
           src={count > 0 ? cartIcon : cartIconEmpty}
           alt="logo"
           style={cartIconStyle}

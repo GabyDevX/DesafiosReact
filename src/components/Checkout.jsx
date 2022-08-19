@@ -11,63 +11,88 @@ import moment from 'moment'
 import Swal from 'sweetalert2'
 
 const Checkout = () => {
-  //Context data y estados
+  //Context data and states
   const { cart, total, clear } = useContext(MyContext)
   const [name, setName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [confirmEmail, setConfirmEmail] = useState('')
   const [orderDocId, setOrderDocId] = useState('')
+  const [checked, setChecked] = useState(false)
 
-  //Funcion para finalizar la compra
-  const finalizarCompra = () => {
-    //Expresiones regulares para las restricciones del formulario
+  //Checkout function
+  const checkout = () => {
+    //REGEX to use in form restrictions
     const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-    const regexTelefono = /^[0-9]+$/
+    const regexPhone = /^[0-9]+$/
 
-    //Restricciones del formulario
+    //Form validation
 
-    //Campos vacíos
-    if (email === '' || phone === '' || name === '') {
+    //Doesn't admit empty entries
+    if (email === '' || phone === '' || name === '' || lastName === '') {
       Swal.fire({
         title: 'Error!',
-        text: 'Los campos no pueden estar vacios',
+        text: 'Please fill all fields',
         icon: 'error',
-        confirmButtonText: 'Continuar',
+        confirmButtonText: 'Continue',
       })
       return
     }
 
-    //Numero de telefono correcto
-    if (phone !== '' && !regexTelefono.test(phone)) {
+    //Phone number validation
+    if (phone !== '' && !regexPhone.test(phone)) {
       Swal.fire({
         title: 'Error!',
-        text: 'Ingrese un número de telefono válido',
+        text: 'Please enter a valid phone number',
         icon: 'error',
-        confirmButtonText: 'Continuar',
+        confirmButtonText: 'Continue',
       })
       return
     }
 
-    //Direccion de email correcto
+    //Wrong email adress validation
     if (email !== '' && !regexEmail.test(email)) {
       Swal.fire({
         title: 'Error!',
-        text: 'Ingrese un email válido',
+        text: 'Please enter a valid email address',
         icon: 'error',
-        confirmButtonText: 'Continuar',
+        confirmButtonText: 'Continue',
       })
       return
     }
 
-    //Alerta en caso de éxito
+    //Same email adress validation
+    if (email !== confirmEmail) {
+      Swal.fire({
+        title: 'Error!',
+        text: "The email adress doesn't match",
+        icon: 'error',
+        confirmButtonText: 'Continue',
+      })
+      return
+    }
+
+    //If the cart is empty, they can't checkout
+    if (cart.length === 0) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'The cart needs at least one item to checkout',
+        icon: 'error',
+        confirmButtonText: 'Continue',
+      })
+      return
+    }
+
+    //Success alert
     Swal.fire({
-      title: 'Exito!',
-      text: 'Ha realizado exitosamente su compra',
+      title: 'Success!',
+      text: 'You have successfully made your purchase',
       icon: 'success',
-      confirmButtonText: 'Continuar',
+      confirmButtonText: 'Continue',
     })
 
-    //Documento para enviar a Firestore
+    //Document to upload to firestore
     const order = {
       buyer: {
         name,
@@ -76,16 +101,18 @@ const Checkout = () => {
       },
       items: cart,
       date: moment().format('DD-MM-YYYY hh:mm:ss'),
+      status: 'generated',
       total: total,
     }
 
-    //Firestore comandos para subir documento(orden de compra) y actualizar stock de documentos(productos)
+    //Firestore commands to get the database and upload a firestore document(order) and update the cart documents stock
     const db = getFirestore()
 
     const refCollection = collection(db, 'orders')
 
     addDoc(refCollection, order).then((res) => {
       setOrderDocId(res.id)
+      setChecked(true)
       cart.forEach((product) =>
         updateDoc(doc(db, 'productos', product.id), {
           stock: product.stock - product.quantity,
@@ -121,39 +148,63 @@ const Checkout = () => {
   }
   return (
     <div style={styles}>
-      <input
-        style={styleInput}
-        type="text"
-        name="nombre"
-        placeholder="Nombre"
-        id=""
-        value={name}
-        onChange={(event) => setName(event.target.value)}
-      />
-      <input
-        style={styleInput}
-        type="tel"
-        name="telefono"
-        placeholder="Telefono"
-        id=""
-        value={phone}
-        onChange={(event) => setPhone(event.target.value)}
-      />
-      <input
-        style={styleInput}
-        type="email"
-        name="email"
-        placeholder="Email"
-        id=""
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-      />
-      <button style={styleComprar} onClick={finalizarCompra}>
-        Finalizar compra
-      </button>
-      <h1>
+      {checked ? (
+        <h1>Thanks for your purchase!</h1>
+      ) : (
+        <div style={styles}>
+          <input
+            style={styleInput}
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            id=""
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
+          <input
+            style={styleInput}
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            id=""
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+          />
+          <input
+            style={styleInput}
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            id=""
+            value={phone}
+            onChange={(event) => setPhone(event.target.value)}
+          />
+          <input
+            style={styleInput}
+            type="email"
+            name="email"
+            placeholder="Email"
+            id=""
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <input
+            style={styleInput}
+            type="email"
+            name="confirmEmail"
+            placeholder="Confirm Email"
+            id=""
+            value={confirmEmail}
+            onChange={(event) => setConfirmEmail(event.target.value)}
+          />
+          <button style={styleComprar} onClick={checkout}>
+            Checkout!
+          </button>
+        </div>
+      )}
+      <h2>
         {orderDocId != '' ? 'Order Id:' : ''} {orderDocId}
-      </h1>
+      </h2>
     </div>
   )
 }

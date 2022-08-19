@@ -2,7 +2,7 @@ import React from 'react'
 import NavBarItem from './NavBarItem'
 
 function NavbarMenu() {
-  //Estilos
+  //Styles
   const styles = {
     display: 'flex',
     flexDirection: 'row',
@@ -12,11 +12,11 @@ function NavbarMenu() {
 
   return (
     <div style={styles}>
-      <NavBarItem sectionId="/categoria/jbl" title="JBL Speakers" />
+      <NavBarItem sectionId="/category/jbl" title="JBL Speakers" />
       |
-      <NavBarItem sectionId="/categoria/sony" title="Sony Speakers" />
+      <NavBarItem sectionId="/category/sony" title="Sony Speakers" />
       |
-      <NavBarItem sectionId="/categoria/mi" title="Mi Speakers" />
+      <NavBarItem sectionId="/category/mi" title="Mi Speakers" />
     </div>
   )
 }
