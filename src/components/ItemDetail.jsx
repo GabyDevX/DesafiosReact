@@ -25,7 +25,6 @@ const ItemDetail = ({ product }) => {
     backgroundColor: '#fff',
     padding: '.5rem',
     minHeight: '100vh',
-    width: '100%',
     borderRadius: 6,
     color: '#000',
     display: 'flex',
@@ -33,6 +32,9 @@ const ItemDetail = ({ product }) => {
     justifyContent: 'space-around',
     alignItems: 'center',
     fontSize: '15px',
+  }
+  const styleGeneral = {
+    width: '100%',
   }
   const styleDetails = {
     width: '20%',
@@ -54,9 +56,9 @@ const ItemDetail = ({ product }) => {
     cursor: 'pointer',
   }
   return (
-    <div style={styles}>
+    <div style={styleGeneral}>
       {product === undefined ? (
-        <h1>The product doesn't exist'</h1>
+        <h1>The product doesn't exist</h1>
       ) : (
         <div style={styles}>
           <img src={`${product.imagen}`} style={styleImage} alt="" />
